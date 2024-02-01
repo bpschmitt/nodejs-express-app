@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: nodejs-app-green
+      annotations:
+        instrumentation.newrelic.com/inject-nodejs: "true"
     spec:
       containers:
       - name: nodejs-app
@@ -21,9 +23,7 @@ spec:
         env:
         - name: APP_VERSION
           value: "green"
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
