@@ -11,9 +11,9 @@ spec:
     metadata:
       labels:
         app: nodejs-app-green
-      annotations:
-        instrumentation.newrelic.com/inject-nodejs: "true"
-        sidecar.istio.io/inject: "false"
+      # annotations:
+      #   instrumentation.newrelic.com/inject-nodejs: "true"
+      #   sidecar.istio.io/inject: "false"
     spec:
       containers:
       - name: nodejs-app
