@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-app-green
+  template:
+    metadata:
+      labels:
+        app: nodejs-app-green
+    spec:
+      containers:
+      - name: nodejs-app
+        image: bschmitt769/nodejs-express-app:0.4
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: APP_VERSION
+          value: "green"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-app-service-green
+spec:
+  selector:
+    app: nodejs-app-green
+  ports:
+  - port: 80
+    targetPort: 3000
+    name: http
