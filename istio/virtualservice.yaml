@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nodejs-express-app
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - nodejs-express-app-gateway
+  http:
+  - name: blue
+    match:
+    - uri:
+        prefix: "/blue"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: nodejs-app-service-blue.canary.svc.cluster.local
+        port:
+          number: 80
+  - name: green
+    match:
+    - uri:
+        prefix: "/green"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: nodejs-app-service-green.canary.svc.cluster.local
+        port:
+          number: 80
